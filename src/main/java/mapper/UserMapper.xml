@@ -26,5 +26,28 @@
     <delete id="deleteUsers" parameterType="string">
         delete from user where id in (${id})
     </delete>
+                <!--map传参-->
+
+    <select id="getUserByParams3" resultType="pojo.User">
+        select  * from user
+        where  name = #{username}
+          and pwd =#{password}
+    </select>
+    <select id="getUserByParams1" resultType="pojo.User">
+        select * from user
+        where  name  = #{name}
+          and pwd = #{pwd}
+    </select>
+    <select id="getUserByParams2" resultType="pojo.User">
+        select * from user
+        where  name  = #{arg0}
+          and pwd = #{arg1}
+    </select>
+    <select id="gerUserByParams4" resultType="pojo.User">
+        select *from  user
+        where name = #{name}
+          and pwd = #{pwd}
+    </select>
+
 
 </mapper>
