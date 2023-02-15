@@ -1,6 +1,7 @@
 package mapper;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import pojo.User;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface UserMapper {
     int deleteUsers(String id);
 
     //参数传递
-    List<User> getUserByParams1(Map map);
+    List<User> getUserByParams1(@Param("map") Map map);
     //按照顺序传参
     List<User> getUserByParams2(String aaa,String bbb);
 
@@ -31,6 +32,11 @@ public interface UserMapper {
 
     List<User> gerUserByParams4(User user);
 
-    class varchar {
-    }
+    /*//-----------------------------------------2.15------------------------------------------------*/
+
+    List<User> getAllUsers4ResultMap();
+
+    List<User> getAllUsers4Limit(@Param("a") int a ,@Param("b") int b);
+    List<User> getAllUsers4RowBounds(RowBounds rowBounds);
+    List<User> getAllUsers4pagehelper();
 }

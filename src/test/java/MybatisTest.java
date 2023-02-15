@@ -1,5 +1,8 @@
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -114,5 +117,50 @@ public class MybatisTest {
         List<User> userByParams4 = mapper.gerUserByParams4(user);
         System.out.println(userByParams4);
         }
+/*------------------------------------------------2.15--------------------------------------------------*/
+        @Test
+        public void testResultMap(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper =sqlSession.getMapper(UserMapper.class);
+        List<User> allUsers4ResultMap = mapper.getAllUsers4ResultMap();
+        System.out.println(allUsers4ResultMap);
+    }
 
+    @Test
+    public void testlimit(){
+        SqlSession sqlSession =MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int pageNo = 3;
+        int pageSize = 2;
+        int pageIndex =(pageNo-1)*pageSize;
+        List<User> allUsers4ResultMap = mapper.getAllUsers4Limit(pageIndex,pageSize);
+        System.out.println(allUsers4ResultMap);
+    }
+
+    public  void testRowBounds(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int pageNo = 3;
+        int pageSize = 2;
+        int pageIndex =(pageNo-1)*pageSize;
+        RowBounds rowBounds = new RowBounds(pageIndex,pageSize);
+        List<User> allUsers4RowBounds = mapper.getAllUsers4RowBounds(rowBounds);
+        System.out.println(allUsers4RowBounds);
+
+    }
+
+    public  void testPageHelper(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int pageNo = 3;
+        int paSize = 2;
+        PageHelper.startPage(pageNo,paSize);
+
+        List<User> allUsers4RowBounds = mapper.getAllUsers4pagehelper();
+        PageInfo<User> pageInfo = new PageInfo<>(allUsers4RowBounds);
+        List<User> list = pageInfo.getList();
+        for ( User user :list){
+        System.out.println(user);
+        }
+    }
 }

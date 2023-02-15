@@ -4,6 +4,20 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
     <configuration>
+    <!--2.15-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+    <typeAliases>
+        <package name="pojo"/>
+    </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+               <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+    <!--2.15-->
 
 
     <environments default="development">
@@ -24,6 +38,7 @@
 </environments>
     <mappers>
     <mapper resource="mapper/UserMapper.xml"/>
+        <mapper class="mapper.AbcMapper"/>
 </mappers>
 
 </configuration>

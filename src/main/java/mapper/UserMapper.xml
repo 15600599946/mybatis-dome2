@@ -50,4 +50,25 @@
     </select>
 
 
+
+        <!--2.15-->
+
+
+    <select id="getAllUsers4ResultMap" resultType="pojo.User">
+        select  * from user
+    </select>
+
+
+    <select id="getAllUsers4Limit" resultType="pojo.User">
+        select * from user limit #{a},#{b}
+    </select>
+    <select id="getAllUsers4RowBounds" resultType="pojo.User">
+        select * from user
+    </select>
+    <select id="getAllUsers4pagehelper" resultType="pojo.User">
+        select * from  user
+    </select>
+
+
+
 </mapper>
